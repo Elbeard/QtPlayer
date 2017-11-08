@@ -2,6 +2,7 @@
 #define MYDIALOGWINDOW_H
 
 #include <QDialog>
+#include "player.h"
 
 namespace Ui {
 class MyDialogWindow;
@@ -17,9 +18,11 @@ public:
 
 private:
     Ui::MyDialogWindow *ui;
+    Player *player;
 
 private slots:
     void on_OpenButton_clicked();
+    void on_PlayButton_clicked();
 };
 
 #endif // MYDIALOGWINDOW_H
