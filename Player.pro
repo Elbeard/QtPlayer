@@ -24,22 +24,22 @@ DEFINES += QT_DEPRECATED_WARNINGS
 
 
 SOURCES += \
-        main.cpp \
-    mydialogwindow.cpp \
-    player.cpp
+        main.cpp
 
-HEADERS += \
-    mydialogwindow.h \
-    player.h
+HEADERS +=
 
-FORMS += \
-    mydialogwindow.ui
+FORMS +=
 
-LIBS += "C:\Qt\QtProg\Player\bass.lib"
+#@
+#INCLUDEPATH += C:/path/to/includedir
+#LIBS += -LC:/path/to/libdir -lyaml-cpp
+#@
 
-win32:CONFIG(release, debug|release): LIBS += -L$$PWD/../ConsolePlayerTest/Player1/ -lbass
-else:win32:CONFIG(debug, debug|release): LIBS += -L$$PWD/../ConsolePlayerTest/Player1/ -lbassd
-else:unix: LIBS += -L$$PWD/../ConsolePlayerTest/Player1/ -lbass
+#LIBS += "C:\Qt\QtProg\Player\bass.lib"
 
-INCLUDEPATH += $$PWD/../ConsolePlayerTest/Player1
-DEPENDPATH += $$PWD/../ConsolePlayerTest/Player1
+
+
+win32: LIBS += -L$$PWD/./ -lbass
+
+INCLUDEPATH += $$PWD/.
+DEPENDPATH += $$PWD/.
