@@ -45,7 +45,7 @@ int main(int argc, char *argv[])
     if (!BASS_ChannelPlay(stream,FALSE))
         Error("Can't play music");
 
-    while (BASS_ChannelIsSliding(stream,0)) Sleep(1);
+    system("pause");
 
     BASS_Free();
 
