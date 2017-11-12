@@ -1,5 +1,8 @@
 #include <stdio.h>
 #include "bass.h"
+#include <unistd.h>
+
+#define Sleep(x) usleep(x*1000)
 
 void Error(const char *text)
 {
@@ -11,7 +14,7 @@ void Error(const char *text)
 int main(int argc, char *argv[])
 {
     //HSTREAM chan;
-    char *filename = "C:\Qt\QtProg\5.mp3";
+    char *filename = "C:/Qt/QtProg/5.mp3";
 
     printf("Simple console mode BASS example : MOD/MPx/OGG/WAV player\n"
                 "---------------------------------------------------------\n");
@@ -27,13 +30,13 @@ int main(int argc, char *argv[])
         printf("BASS is successful initialaze\n");
     }
 
-    printf("%s\n",filename);
+    printf("addres in filename = %s\n",filename);
 
     /*Convert filename to c char array so we can use it with BASS
     QByteArray temparr = file.toLocal8Bit(); //QString file в файле лежит адрес файла"C:\Qt\QtProg\5.mp3"
     char *cfile = temparr.data();*/
 
-    HSTREAM stream=BASS_StreamCreateFile(FALSE, "5.mp3", 0, 0, 0);
+    HSTREAM stream=BASS_StreamCreateFile(FALSE, "c:/3.mp3", 0, 0,BASS_SAMPLE_LOOP);
     if(BASS_ErrorGetCode() != BASS_OK){
         Error("Stream error\n");
     }
@@ -41,15 +44,17 @@ int main(int argc, char *argv[])
     // play the music (continue from current position)
     if (!BASS_ChannelPlay(stream,FALSE))
         Error("Can't play music");
-    /*else {
-        BASS_ChannelPlay(stream,FALSE);
-    }*/
+
+    while (BASS_ChannelIsSliding(stream,0)) Sleep(1);
+
+    BASS_Free();
 
   return 0;
 }
 /*
 *   В консоли выводит
+*   Simple console mode BASS example : MOD/MPx/OGG/WAV player
+*   ---------------------------------------------------------
 *   BASS is successful initialaze
-*   C:QtQtProg.mp3
-*   Error(2): Stream error
+*   C:/Qt/QtProg/5.mp3
 */
