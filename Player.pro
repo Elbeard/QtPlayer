@@ -24,11 +24,16 @@ DEFINES += QT_DEPRECATED_WARNINGS
 
 
 SOURCES += \
-        main.cpp
+        main.cpp \
+    mainwindow.cpp \
+    player.cpp
 
-HEADERS +=
+HEADERS += \
+    mainwindow.h \
+    player.h
 
-FORMS +=
+FORMS += \
+    mainwindow.ui
 
 #@
 #INCLUDEPATH += C:/path/to/includedir
