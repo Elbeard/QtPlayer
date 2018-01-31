@@ -16,14 +16,14 @@ MainWindow::~MainWindow()
 void MainWindow::on_openButton_clicked()
 {
 
-}
+}*/
 
 void MainWindow::on_playButton_clicked()
 {
-
+    player->Play();
 }
 
 void MainWindow::on_stopButton_clicked()
 {
-
-}*/
+    player->Error("Текст ошибки");
+}

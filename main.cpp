@@ -1,10 +1,15 @@
 #include <QApplication>
 #include "mainwindow.h"
+//#include "player.h"
 
 int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
     MainWindow w;
+
+    /*Player *player =class Player();
+
+    player->Initialize();*/
 
     w.show();
     a.exec();
