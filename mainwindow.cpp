@@ -1,6 +1,7 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 
+
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow)
@@ -12,11 +13,11 @@ MainWindow::~MainWindow()
 {
     delete ui;
 }
-/*
+
 void MainWindow::on_openButton_clicked()
 {
-
-}*/
+    player->OpenFile();
+}
 
 void MainWindow::on_playButton_clicked()
 {
@@ -25,5 +26,5 @@ void MainWindow::on_playButton_clicked()
 
 void MainWindow::on_stopButton_clicked()
 {
-    player->Error("Текст ошибки");
+    player->StopPlaying();
 }

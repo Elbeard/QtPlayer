@@ -1,10 +1,11 @@
 #include "player.h"
 #include "bass.h"
 #include <QMessageBox>
+#include <QFileDialog>
 
 Player::Player(QObject *parent) : QObject(parent)
 {
-    filename = "C:/Qt/QtProg/5.mp3";
+    //filename = "C:/Qt/QtProg/5.mp3";
 
     this->Initialize();
 }
@@ -41,25 +42,44 @@ void Player::Error(QString text)
 
 void Player::Play()
 {
-     stream = BASS_StreamCreateFile(FALSE, filename, 0, 0, NULL);
+    if (!isPlaying)
+    {
+        // play the music (continue from current position)
+        if (!BASS_ChannelPlay(stream,FALSE)){
+            //this->Error("Can't play music");
+            this->Error(QString::number(BASS_ErrorGetCode()));}
+    }
 
-    //if (!BASS_StreamCreateFile(TRUE, "", 0, 0,BASS_SAMPLE_LOOP))
+    else
+    {
+        BASS_ChannelPause(stream);
+    }
 
-        //Здесь маленькая победа с преобразованием топов. (Решение заняло два вечера.)
-       // this->Error(QString::number(BASS_ErrorGetCode()));
+    isPlaying = !isPlaying;
 
-//    if(BASS_ErrorGetCode() != BASS_OK){
-//        this->Error("Stream error\n");
-//    }
 
-       // play the music (continue from current position)
-       if (!BASS_ChannelPlay(stream,FALSE)){
-           this->Error("Can't play music");
-           this->Error(QString::number(BASS_ErrorGetCode()));}
+
 }
 
+void Player::OpenFile()
+{
+    filename = QFileDialog::getOpenFileName();
 
+    /*
+        Странное действие с переменной filename здесь это
+        преобразование типа данных QString который даёт на выходе QFileDialog
+        в тип char который может принять BASS_StreamCreateFile
+    */
 
+    stream = BASS_StreamCreateFile(FALSE, filename.toLocal8Bit().data(), 0, 0, NULL);
+}
+
+void Player::StopPlaying()
+{
+
+    BASS_StreamFree(stream);
+    isPlaying = FALSE;
+}
 
 
 

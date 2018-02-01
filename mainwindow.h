@@ -19,7 +19,7 @@ public:
     ~MainWindow();
 
 private slots:
-    //void on_openButton_clicked();
+    void on_openButton_clicked();
 
     void on_playButton_clicked();
 
