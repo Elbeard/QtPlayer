@@ -7,9 +7,10 @@
 class Player : public QObject
 {
     Q_OBJECT
-private: Player *player;
+private:
 public:
     char *filename;
+    HSTREAM stream=0;
     explicit Player(QObject *parent = nullptr);
     void Play();
     void Error(QString text);
