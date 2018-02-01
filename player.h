@@ -10,11 +10,13 @@ class Player : public QObject
 private:
 public:
     char *filename;
-    HSTREAM stream=0;
+    HSTREAM stream = NULL;
     explicit Player(QObject *parent = nullptr);
-    void Play();
-    void Error(QString text);
+
     void Initialize();
+    void Error(QString text);
+    void Play();
+
     ~Player();
 
     signals:

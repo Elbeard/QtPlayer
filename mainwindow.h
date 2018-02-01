@@ -12,7 +12,7 @@ class MainWindow : public QMainWindow
 {
     Q_OBJECT
 private:
-    Player *player;
+    Player *player = new Player;
 
 public:
     explicit MainWindow(QWidget *parent = 0);
